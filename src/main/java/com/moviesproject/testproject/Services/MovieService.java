@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MovieService {
@@ -26,20 +27,20 @@ public class MovieService {
     }
 
     //Obtain an specific movie
-   /* public ResponseEntity<Movie> getMoviesById(Long id) {
-    	//Movie movie = iMovieRepository.
+   public ResponseEntity<Optional<Movie>> getMoviesById(Long id) {
+    	Optional<Movie> movie = iMovieRepository.findById(id);
 
     	if (movie == null)
     		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
-    	return new ResponseEntity<>(movie, HttpStatus.OK);
-    }*/
+    	return ResponseEntity.status(HttpStatus.OK).body(movie);
+    }
 
     //Add a movie
     public ResponseEntity<Movie> addMovie(Movie movie) {
     	iMovieRepository.save(movie);
     	
-    	return new ResponseEntity<>(movie, HttpStatus.CREATED);
+    	return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     //Save movies into DB

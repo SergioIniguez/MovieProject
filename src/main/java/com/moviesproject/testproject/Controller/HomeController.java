@@ -6,12 +6,10 @@ import com.moviesproject.testproject.Services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class HomeController {
@@ -19,16 +17,18 @@ public class HomeController {
     @Autowired
     private MovieService movieService ;
 
-    @GetMapping("/movies")
+    @GetMapping("/movie")
     public ResponseEntity<List<Movie>> getMovies() {
         return movieService.getAllMovies();
     }
 
-    /*@GetMapping("/movies/{id}")
-    public ResponseEntity<Movie> getMovie(@PathVariable long id) {
-        ResponseEntity<Movie> movie = movieService.getMoviesById(id);
+    @GetMapping("/movie/{id}")
+    public ResponseEntity<Optional<Movie>> getMovie(@PathVariable long id) {
+        return movieService.getMoviesById(id);
+    }
 
-        return movie;
-    }*/
-
+    @PostMapping("/movie")
+    public void createMovie(@RequestBody Movie movie) {
+        movieService.addMovie(movie);
+    }
 }
