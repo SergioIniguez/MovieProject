@@ -47,6 +47,24 @@ public class MovieService {
     public void saveMovies(List<Movie> movies) {
     	iMovieRepository.saveAll(movies);
     }
-    	
-    
+
+    //Obtain an specific movie by year
+    public ResponseEntity<List<Movie>> getMoviesByYear(String year) {
+        List<Movie> movie = iMovieRepository.findByYear(year);
+
+        if (movie == null)
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        return ResponseEntity.status(HttpStatus.OK).body(movie);
+    }
+
+    //Obtain an specific movie by year
+    public ResponseEntity<List<Movie>> getMoviesByGenres(String[] genres) {
+        List<Movie> movie = iMovieRepository.findByGenres(genres);
+
+        if (movie == null)
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        return ResponseEntity.status(HttpStatus.OK).body(movie);
+    }
 }

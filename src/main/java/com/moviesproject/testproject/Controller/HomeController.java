@@ -31,4 +31,14 @@ public class HomeController {
     public void createMovie(@RequestBody Movie movie) {
         movieService.addMovie(movie);
     }
+
+    @GetMapping("/movie/year/{year}")
+    public ResponseEntity<List<Movie>> getMovieByYear(@PathVariable String year) {
+        return movieService.getMoviesByYear(year);
+    }
+
+    @GetMapping("/movie/genres/{genres}")
+    public ResponseEntity<List<Movie>> getMovieByYear(@PathVariable String[] genres) {
+        return movieService.getMoviesByGenres(genres);
+    }
 }
