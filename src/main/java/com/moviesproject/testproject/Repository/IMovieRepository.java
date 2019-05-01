@@ -19,4 +19,8 @@ public interface IMovieRepository extends JpaRepository<Movie, Long> {
 
     boolean existsByGenres(String[] genres);
 
+    List<Movie> findAllOrderByImdbRatingAsc(String imdbRating);
+
+    List<Movie> findAllOrderByImdbRatingDesc(String imdbRating);
+
 }
