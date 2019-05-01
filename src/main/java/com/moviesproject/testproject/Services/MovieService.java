@@ -29,8 +29,9 @@ public class MovieService {
     //Obtain an specific movie
    public ResponseEntity<Optional<Movie>> getMoviesById(Long id) {
     	Optional<Movie> movie = iMovieRepository.findById(id);
+    	boolean movieExist = iMovieRepository.existsById(id);
 
-    	if (movie == null)
+    	if (movieExist == false)
     		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
     	return ResponseEntity.status(HttpStatus.OK).body(movie);
@@ -51,18 +52,20 @@ public class MovieService {
     //Obtain an specific movie by year
     public ResponseEntity<List<Movie>> getMoviesByYear(String year) {
         List<Movie> movie = iMovieRepository.findByYear(year);
+        boolean yearExist = iMovieRepository.existsByYear(year);
 
-        if (movie == null)
+        if (yearExist == false)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
         return ResponseEntity.status(HttpStatus.OK).body(movie);
     }
 
-    //Obtain an specific movie by year
+    //Obtain an specific movie by genre
     public ResponseEntity<List<Movie>> getMoviesByGenres(String[] genres) {
         List<Movie> movie = iMovieRepository.findByGenres(genres);
+        boolean genreExist = iMovieRepository.existsByGenres(genres);
 
-        if (movie == null)
+        if (genreExist == false)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
         return ResponseEntity.status(HttpStatus.OK).body(movie);

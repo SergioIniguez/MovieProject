@@ -11,7 +11,12 @@ import java.util.List;
 public interface IMovieRepository extends JpaRepository<Movie, Long> {
 
 
-    public List<Movie> findByYear(String year);
+    List<Movie> findByYear(String year);
 
-    public List<Movie> findByGenres(String[] genres);
+    List<Movie> findByGenres(String[] genres);
+
+    boolean existsByYear(String year);
+
+    boolean existsByGenres(String[] genres);
+
 }

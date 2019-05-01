@@ -38,7 +38,7 @@ public class HomeController {
     }
 
     @GetMapping("/movie/genres/{genres}")
-    public ResponseEntity<List<Movie>> getMovieByYear(@PathVariable String[] genres) {
+    public ResponseEntity<List<Movie>> getMovieByGenre(@PathVariable String[] genres) {
         return movieService.getMoviesByGenres(genres);
     }
 }
