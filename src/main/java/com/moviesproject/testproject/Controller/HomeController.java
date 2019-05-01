@@ -19,8 +19,8 @@ public class HomeController {
     private MovieService movieService ;
 
     @GetMapping("/movie")
-    public ResponseEntity<List<Movie>> getMovies(@RequestParam String order) {
-        return movieService.getAllMovies();
+    public ResponseEntity<List<Movie>> getMovies(@RequestParam(defaultValue = "original") String order) {
+        return movieService.getAllMovies(order);
     }
 
     @GetMapping("/movie/{id}")
@@ -41,10 +41,5 @@ public class HomeController {
     @GetMapping("/movie/genres/{genres}")
     public ResponseEntity<List<Movie>> getMovieByGenre(@PathVariable String[] genres) {
         return movieService.getMoviesByGenres(genres);
-    }
-
-    @GetMapping("/movie/")
-    public ResponseEntity<List<Movie>> getMovieByRating(@RequestParam String rating) {
-        return movieService.orderMoviesByRating(rating);
     }
 }
