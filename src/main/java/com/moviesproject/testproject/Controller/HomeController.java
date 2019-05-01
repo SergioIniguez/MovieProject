@@ -12,13 +12,14 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@ResponseBody
 public class HomeController {
 
     @Autowired
     private MovieService movieService ;
 
     @GetMapping("/movie")
-    public ResponseEntity<List<Movie>> getMovies() {
+    public ResponseEntity<List<Movie>> getMovies(@RequestParam String order) {
         return movieService.getAllMovies();
     }
 
@@ -40,5 +41,10 @@ public class HomeController {
     @GetMapping("/movie/genres/{genres}")
     public ResponseEntity<List<Movie>> getMovieByGenre(@PathVariable String[] genres) {
         return movieService.getMoviesByGenres(genres);
+    }
+
+    @GetMapping("/movie/")
+    public ResponseEntity<List<Movie>> getMovieByRating(@RequestParam String rating) {
+        return movieService.orderMoviesByRating(rating);
     }
 }

@@ -70,4 +70,15 @@ public class MovieService {
 
         return ResponseEntity.status(HttpStatus.OK).body(movie);
     }
+
+    //Obtain movies by rating
+    public ResponseEntity<List<Movie>> orderMoviesByRating(String rating) {
+	    if(rating.toLowerCase().equals("asc")) {
+            return ResponseEntity.status(HttpStatus.OK).body(iMovieRepository.findAllByOrderByImdbRatingAsc());
+        } else if(rating.toLowerCase().equals("desc")) {
+            return ResponseEntity.status(HttpStatus.OK).body(iMovieRepository.findAllByOrderByImdbRatingDesc());
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }
